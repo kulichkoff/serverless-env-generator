@@ -199,8 +199,6 @@ sls env -a $NAME --decrypt
 sls env -a $NAME -s $STAGE -d
 ```
 
-### Decrypt variables
-
 ## Setting environment variables
 
 Use the following commands to store and encrypt variables in your YAML environment files:
@@ -233,22 +231,18 @@ sls env -a $NAME -v $PLAINTEXT -s $STAGE -e
 
 ```sh
 serverless env --anchor $NAME --attribute $NAME --value $PLAINTEXT
-serverless env --anchor $NAME --attribute $NAME --value $PLAINTEXT --stage $STAGE
 
 #shorthand:
 sls env -c $NAME -a $NAME -v $PLAINTEXT
-sls env -c $NAME -a $NAME -v $PLAINTEXT -s $STAGE
 ```
 
 ### Set and encrypt a variable for an anchor
 
 ```sh
 serverless env --anchor $NAME --attribute $NAME --value $PLAINTEXT --encrypt
-serverless env --anchor $NAME --attribute $NAME --value $PLAINTEXT --stage $STAGE --encrypt
 
 #shorthand:
 sls env -c $NAME -a $NAME -v $PLAINTEXT -e
-sls env -c $NAME -a $NAME -v $PLAINTEXT -s $STAGE -e
 ```
 
 # YAML File Structure
