@@ -19,6 +19,10 @@ class ServerlessEnvGeneratorPlugin {
             usage: 'Name of the attribute',
             shortcut: 'a'
           },
+          anchor: {
+            usage: 'Name of the anchor',
+            shortcut: 'c'
+          },
           value: {
             usage: 'Value of the attribute',
             shortcut: 'v'
@@ -58,12 +62,17 @@ class ServerlessEnvGeneratorPlugin {
 
   envCommand() {
     let config = this.getConfig()
-    if (this.options.value && this.options.attribute) {
-      return helper.setEnvVar(this.options.attribute, this.options.value, !!this.options.encrypt, config).then(_ => {
+    if (this.options.value && this.options.attribute && this.options.anchor) {
+      return helper.setEnvVarValueByAnchorAndAttribute(this.options.anchor, this.options.attribute, this.options.value, !!this.options.encrypt, config).then(_ => {
+        this.serverless.cli.log(`Successfuly set ${this.options.attribute} for anchor ${this.options.anchor} 🎉`)
+      })
+
+    } else if (this.options.value && this.options.attribute) {
+      return helper.setEnvVarValueByAttribute(this.options.attribute, this.options.value, !!this.options.encrypt, config).then(_ => {
         this.serverless.cli.log(`Successfuly set ${this.options.attribute} 🎉`)
       })
     } else if (this.options.value) {
-      return Promise.reject(new Error('Setting a value requires --attribute'))
+      return Promise.reject(new Error('Setting a value requires --attribute or --anchor and --attribute'))
     } else {
       return helper.getEnvVars(this.options.attribute, !!this.options.decrypt, config).then(envFiles => {
         envFiles.forEach(envFile => {

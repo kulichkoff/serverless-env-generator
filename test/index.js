@@ -10,7 +10,8 @@ const chaiAsPromised = require('chai-as-promised');
 const expect = chai.expect
 chai.use(chaiAsPromised)
 
-const defaultEnvFiles = [{
+const defaultEnvFiles = [
+  {
     file: 'path.yml',
     filePath: 'some/path.yml',
     vars: [{
@@ -169,7 +170,7 @@ describe('index.js', () => {
       value: 'baa',
       encrypt: false
     })
-    sandbox.stub(helper, 'setEnvVar').callsFake((attribute, value, encrypted, config) => {
+    sandbox.stub(helper, 'setEnvVarValueByAttribute').callsFake((attribute, value, encrypted, config) => {
       expect(attribute).to.equal('foo')
       expect(value).to.equal('baa')
       expect(encrypted).to.equal(false)
@@ -183,7 +184,7 @@ describe('index.js', () => {
     sandbox.stub(serverless.cli, 'log')
       .onCall(0).callsFake(_ => expect(_).to.equal('Successfuly set foo 🎉'))
     return envGenerator.hooks['env:env']().then(_ => {
-      expect(helper.setEnvVar.callCount).to.equal(1)
+      expect(helper.setEnvVarValueByAttribute.callCount).to.equal(1)
     })
   })
 
@@ -193,7 +194,7 @@ describe('index.js', () => {
       value: 'baa',
       encrypt: true
     })
-    sandbox.stub(helper, 'setEnvVar').callsFake((attribute, value, encrypt, config) => {
+    sandbox.stub(helper, 'setEnvVarValueByAttribute').callsFake((attribute, value, encrypt, config) => {
       expect(attribute).to.equal('foo')
       expect(value).to.equal('baa')
       expect(encrypt).to.equal(true)
@@ -207,13 +208,74 @@ describe('index.js', () => {
     sandbox.stub(serverless.cli, 'log')
       .onCall(0).callsFake(_ => expect(_).to.equal('Successfuly set foo 🎉'))
     return envGenerator.hooks['env:env']().then(_ => {
-      expect(helper.setEnvVar.callCount).to.equal(1)
+      expect(helper.setEnvVarValueByAttribute.callCount).to.equal(1)
     })
   })
 
   it('should not write a variable if no attribute option is set', () => {
     initEnvGenerator({
       value: 'lalala',
+      encrypt: true
+    })
+    return expect(envGenerator.hooks['env:env']()).to.be.eventually.rejected;
+  })
+
+  it('should write an environment variable for anchor', () => {
+    initEnvGenerator({
+      anchor: 'anchor',
+      attribute: 'foo',
+      value: 'baa',
+      encrypt: false
+    })
+    sandbox.stub(helper, 'setEnvVarValueByAnchorAndAttribute').callsFake((anchor, attribute, value, encrypted, config) => {
+      expect(anchor).to.equal('anchor')
+      expect(attribute).to.equal('foo')
+      expect(value).to.equal('baa')
+      expect(encrypted).to.equal(false)
+      expect(config.region).to.equal('eu-central-1')
+      expect(config.stage).to.equal('dev')
+      expect(config.profile).to.equal('myproject-dev')
+      expect(config.yamlPaths).to.eql(['some/path.yml', 'some/otherPath.yml'])
+      expect(config.kmsKeyId).to.equal('somedevkey')
+      return Promise.resolve(true)
+    })
+    sandbox.stub(serverless.cli, 'log')
+      .onCall(0).callsFake(_ => expect(_).to.equal('Successfuly set foo for anchor anchor 🎉'))
+    return envGenerator.hooks['env:env']().then(_ => {
+      expect(helper.setEnvVarValueByAnchorAndAttribute.callCount).to.equal(1)
+    })
+  })
+
+  it('should write an encrypted environment variable for anchor', () => {
+    initEnvGenerator({
+      anchor: 'anchor',
+      attribute: 'foo',
+      value: 'baa',
+      encrypt: true
+    })
+    sandbox.stub(helper, 'setEnvVarValueByAnchorAndAttribute').callsFake((anchor, attribute, value, encrypted, config) => {
+      expect(anchor).to.equal('anchor')
+      expect(attribute).to.equal('foo')
+      expect(value).to.equal('baa')
+      expect(encrypted).to.equal(true)
+      expect(config.region).to.equal('eu-central-1')
+      expect(config.stage).to.equal('dev')
+      expect(config.profile).to.equal('myproject-dev')
+      expect(config.yamlPaths).to.eql(['some/path.yml', 'some/otherPath.yml'])
+      expect(config.kmsKeyId).to.equal('somedevkey')
+      return Promise.resolve(true)
+    })
+    sandbox.stub(serverless.cli, 'log')
+      .onCall(0).callsFake(_ => expect(_).to.equal('Successfuly set foo for anchor anchor 🎉'))
+    return envGenerator.hooks['env:env']().then(_ => {
+      expect(helper.setEnvVarValueByAnchorAndAttribute.callCount).to.equal(1)
+    })
+  })
+
+  it('should not write a variable if no attribute option is set for anchor', () => {
+    initEnvGenerator({
+      value: 'lalala',
+      anchor: 'anchor',
       encrypt: true
     })
     return expect(envGenerator.hooks['env:env']()).to.be.eventually.rejected;

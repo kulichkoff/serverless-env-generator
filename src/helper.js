@@ -63,19 +63,48 @@ module.exports.getEnvVars = (attribute, decrypt, config) => {
 }
 
 // Sets the env variable
-module.exports.setEnvVar = (attribute, value, encrypt, config) => {
+module.exports.setEnvVarValueByAttribute = (attribute, value, encrypt, config) => {
   let filePath = config.yamlPaths[0]
   if (!filePath) {
     return Promise.reject(new Error('No environment files specified in serverless.yml'))
   }
   return Promise.all([
-    yaml.read(filePath).catch(error => error.code === 'ENOENT' ? {} : Promise.reject(error)),
+    yaml.readAsDoc(filePath),
     (encrypt) ? kms.encrypt(value, config) : Promise.resolve(value)
   ]).then(args => {
-    let doc = Object.assign({}, args[0])
-    let value = args[1]
-    doc[config.stage] = Object.assign({}, doc[config.stage])
-    doc[config.stage][attribute] = (encrypt) ? `${ENCRYPT_PREFIX}${value}` : value
+    let doc = args[0]
+    let value = (encrypt) ? `${ENCRYPT_PREFIX}${args[1]}` : args[1]
+
+    if (!doc) {
+      doc = yaml.createDoc()
+    }
+    yaml.setAttributeForStage(config.stage, attribute, value, doc)
+
+    return yaml.write(filePath, doc)
+  })
+}
+
+// Sets the env variable
+module.exports.setEnvVarValueByAnchorAndAttribute = (anchor, attribute, value, encrypt, config) => {
+  let filePath = config.yamlPaths[0]
+  if (!filePath) {
+    return Promise.reject(new Error('No environment files specified in serverless.yml'))
+  }
+  return Promise.all([
+    yaml.readAsDoc(filePath).catch(error => error.code === 'ENOENT' ? {} : Promise.reject(error)),
+    (encrypt) ? kms.encrypt(value, config) : Promise.resolve(value)
+  ]).then(args => {
+    let doc = args[0]
+    let value = (encrypt) ? `${ENCRYPT_PREFIX}${args[1]}` : args[1]
+
+    const anchorNode = doc.anchors.getNode(anchor)
+
+    if (!anchorNode) {
+      throw new Error('No anchor with name "' + anchor + '"' + ' defined')
+    }
+
+    yaml.safeSetCollectionPair(attribute, value, anchorNode)
+
     return yaml.write(filePath, doc)
   })
 }

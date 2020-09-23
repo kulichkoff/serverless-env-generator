@@ -1,10 +1,9 @@
 Serverless Env Generator Plugin
 =======
 
-[![License][ico-license]][link-license] [![NPM][ico-npm]][link-npm] [![Build Status][ico-build]][link-build] [![Requirements Status][ico-requirements]][link-requirements] [![Coverage Status][ico-coverage]][link-coverage]
+[![License][ico-license]][link-license] [![NPM][ico-npm]][link-npm]
 
-[ico-coverage]: https://coveralls.io/repos/github/DieProduktMacher/serverless-env-generator/badge.svg?branch=develop
-[link-coverage]: https://coveralls.io/github/DieProduktMacher/serverless-env-generator?branch=master
+This is fork of [serverless-env-generator](https://github.com/DieProduktMacher/serverless-env-generator) with more advanced YAML anchor supporting. See extended description for [Commands](#commands) and [YAML File Structure](#yaml-file-structure) and see [Key features of this fork](#key-features-of-this-fork).
 
 This plugin automatically creates a *.env* file during deployment by merging environment variables from one or more YAML files. During runtime these variables can then be loaded into *process.env* using *dotenv*.
 
@@ -20,7 +19,10 @@ For a brief introduction, read our blogpost about [introducing serverless-env-ge
 - Environment variables can be loaded with *dotenv* at startup in Lambda without delays from KMS.
 - Supports *serverless-local-dev-server* and *serverless offline* for local development.
 
+### Key features of this fork:
 
+- Don`t expand merge directives when modifying env file
+- Add new commands that work with anchors
 
 ### Notes
 
@@ -197,6 +199,8 @@ sls env -a $NAME --decrypt
 sls env -a $NAME -s $STAGE -d
 ```
 
+### Decrypt variables
+
 ## Setting environment variables
 
 Use the following commands to store and encrypt variables in your YAML environment files:
@@ -211,7 +215,7 @@ serverless env --attribute $NAME --value $PLAINTEXT --stage $STAGE
 
 #shorthand:
 sls env -a $NAME -v $PLAINTEXT
-sls env --a $NAME -v $PLAINTEXT --s $STAGE
+sls env -a $NAME -v $PLAINTEXT -s $STAGE
 ```
 
 ### Set and encrypt a variable
@@ -225,6 +229,27 @@ sls env -a $NAME -v $PLAINTEXT -e
 sls env -a $NAME -v $PLAINTEXT -s $STAGE -e
 ```
 
+### Set a variable for an anchor
+
+```sh
+serverless env --anchor $NAME --attribute $NAME --value $PLAINTEXT
+serverless env --anchor $NAME --attribute $NAME --value $PLAINTEXT --stage $STAGE
+
+#shorthand:
+sls env -c $NAME -a $NAME -v $PLAINTEXT
+sls env -c $NAME -a $NAME -v $PLAINTEXT -s $STAGE
+```
+
+### Set and encrypt a variable for an anchor
+
+```sh
+serverless env --anchor $NAME --attribute $NAME --value $PLAINTEXT --encrypt
+serverless env --anchor $NAME --attribute $NAME --value $PLAINTEXT --stage $STAGE --encrypt
+
+#shorthand:
+sls env -c $NAME -a $NAME -v $PLAINTEXT -e
+sls env -c $NAME -a $NAME -v $PLAINTEXT -s $STAGE -e
+```
 
 # YAML File Structure
 
@@ -234,11 +259,16 @@ which are then merged into a .env file on deployment.
 File example:
 
 ```yaml
+common: &common
+    commonFoo: foo
+
 dev: #stage
+    <<: *common
     foo: bar #cleartext variable
     bla: crypted:bc89hwnch8hncoaiwjnd... #encrypted variable
 
 production:
+    <<: *common
     foo: baz
     bla: crypted:ncibinv0iwokncoiao3d...
 ```
@@ -294,18 +324,13 @@ Anyone is more than welcome to contribute to the serverless-env-generator plugin
 
 Licensed under the MIT license.
 
-Created and maintained by [DieProduktMacher](http://www.dieproduktmacher.com).
+This fork created and maintained by [Kirill Khoroshilov](https://github.com/Hokid).
 
-Inspired by [Serverless Crypt](https://github.com/marcy-terui/serverless-crypt).
+Inspired by [serverless-env-generator](https://github.com/DieProduktMacher/serverless-env-generator).
 
-[ico-license]: https://img.shields.io/github/license/dieproduktmacher/serverless-env-generator.svg
-[ico-npm]: https://img.shields.io/npm/v/serverless-env-generator.svg
-[ico-build]: https://travis-ci.org/DieProduktMacher/serverless-env-generator.svg?branch=develop
-[ico-contributors]: https://img.shields.io/github/contributors/dieproduktmacher/serverless-env-generator.svg
-[ico-requirements]: https://requires.io/github/DieProduktMacher/serverless-env-generator/requirements.svg?branch=master
+[ico-license]: https://img.shields.io/github/license/org-redtea/serverless-env-generator.svg
+[ico-npm]: https://img.shields.io/npm/v/@redtea/serverless-env-generator.svg
 
 [link-license]: ./LICENSE.txt
-[link-npm]: https://www.npmjs.com/package/serverless-env-generator  
-[link-build]: https://travis-ci.org/DieProduktMacher/serverless-env-generator
-[link-contributors]: https://github.com/DieProduktMacher/serverless-env-generator/graphs/contributors
-[link-requirements]: https://requires.io/github/DieProduktMacher/serverless-env-generator/requirements/?branch=master
+[link-npm]: https://www.npmjs.com/package/@redtea/serverless-env-generator  
+

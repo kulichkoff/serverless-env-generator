@@ -1,15 +1,15 @@
 {
-  "name": "serverless-env-generator",
+  "name": "@redtea/serverless-env-generator",
   "version": "1.4.0",
   "engines": {
     "node": ">=8.0"
   },
-  "description": "A Serverless 1.x plugin to automatically create a .env file during deployment by merging environment variables from one or more YAML files. Variables can be securely encrypted with KMS. Multiple stages and profiles are supported.",
-  "author": "DieProduktMacher <www.dieproduktmacher.com>",
+  "description": "Fork of https://github.com/DieProduktMacher/serverless-env-generator with more advanced YAML anchors supporting",
+  "author": "Kirill Khoroshilov <mr.hokid@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DieProduktMacher/serverless-env-generator"
+    "url": "https://github.com/org-redtea/serverless-env-generator"
   },
   "keywords": [
     "serverless",
@@ -31,7 +31,7 @@
     "aws-sdk": "^2.273.1",
     "dotenv": "^7.0.0",
     "fs-extra": "^6.0.1",
-    "js-yaml": "^3.12.0"
+    "yaml": "2.0.0-0"
   },
   "devDependencies": {
     "chai": "^4.0.0",

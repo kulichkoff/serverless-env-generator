@@ -2879,7 +2879,7 @@ js-tokens@^3.0.2:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
   integrity sha1-mGbfOVECEw449/mWvOtlRDIJwls=
 
-js-yaml@^3.12.0, js-yaml@^3.13.1, js-yaml@^3.5.1, js-yaml@^3.8.3:
+js-yaml@^3.13.1, js-yaml@^3.5.1, js-yaml@^3.8.3:
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
   integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
@@ -5332,6 +5332,11 @@ yaml-ast-parser@0.0.34:
   version "0.0.34"
   resolved "https://registry.yarnpkg.com/yaml-ast-parser/-/yaml-ast-parser-0.0.34.tgz#d00f3cf9d773b7241409ae92a6740d1db19f49e6"
   integrity sha1-0A88+ddztyQUCa6SpnQNHbGfSeY=
+
+yaml@2.0.0-0:
+  version "2.0.0-0"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.0.0-0.tgz#432108d836b6715fd33af2e324a8d3980e96f7fe"
+  integrity sha512-+n+AwzE2hK2j21p36UB2foND6RYQU4PQkdPCK4YF2OKz8BbiNI+NvKS79CpyDChw3k/0L9jnChkjEzKoiu2C7w==
 
 yamljs@^0.3.0:
   version "0.3.0"

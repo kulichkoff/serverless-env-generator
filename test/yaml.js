@@ -57,7 +57,7 @@ describe('yaml.js', () => {
       expect(content).to.equal(yamlText)
       return Promise.resolve()
     })
-    return yaml.write('./some/path.yml', yamlDoc).then(_ => {
+    return yaml.write('./some/path.yml', yaml.createDoc(yamlDoc)).then(_ => {
       expect(fs.writeFile.callCount).to.equal(1)
     })
   })
