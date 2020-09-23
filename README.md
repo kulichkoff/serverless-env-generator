@@ -60,7 +60,7 @@ The `.env.local` file in the project root is here only for the tests.
 
 ```sh
 npm install dotenv --save
-npm install serverless-env-generator --save-dev
+npm install @redtea/serverless-env-generator --save-dev
 ```
 
 ### 2. Create a key on KMS
@@ -85,9 +85,9 @@ functions:
   hello:
     handler: handler.hello
 
-# Add serverless-env-generator to your plugins:
+# Add @redtea/serverless-env-generator to your plugins:
 plugins:
-  - serverless-env-generator
+  - '@redtea/serverless-env-generator'
 
 # Plugin config goes into custom:
 custom:
@@ -282,12 +282,12 @@ In case you are also using the [`serverless-plugin-webpack`](https://github.com/
 
 ## 1. Plugin order in `serverless.yml'
 
-You have to place `serverless-env-generator` before the `serverless-plugin-webpack` in the `serverless.yml`
+You have to place `@redtea/serverless-env-generator` before the `serverless-plugin-webpack` in the `serverless.yml`
 
 ```yaml
 # serverless.yml
 plugins:
-  - serverless-env-generator
+  - '@redtea/serverless-env-generator'
   - serverless-plugin-webpack
 ```
 
@@ -314,11 +314,11 @@ module.exports = {
 ```
 
 # Contribute
-Anyone is more than welcome to contribute to the serverless-env-generator plugin. Here just a few things to consider when doing so:
+Anyone is more than welcome to contribute to the @redtea/serverless-env-generator plugin. Here just a few things to consider when doing so:
 
 - this project uses yarn as a package manager
 - make sure to pass all tests (run *yarn test*)
-- you can add your local *serverless-env-generator* version to other projects: yarn add --dev file:/../serverless-env-generator
+- you can add your local *@redtea/serverless-env-generator* version to other projects: yarn add --dev file:/../serverless-env-generator
 
 # License & Credits
 
