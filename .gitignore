@@ -4,3 +4,6 @@
 node_modules/
 # IDE
 .idea
+test/e2e/env.yml
+test/e2e/.serverless
+test/e2e/.env

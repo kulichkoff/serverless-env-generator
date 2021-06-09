@@ -4,8 +4,8 @@ const chaiAsPromised = require('chai-as-promised')
 const sinon = require('sinon')
 const fs = require('fs-extra')
 const yaml = require('yaml')
-const helper = require('../src/helper')
-const kms = require('../src/kms')
+const helper = require('../../src/helper')
+const kms = require('../../src/kms')
 
 chai.use(chaiAsPromised)
 const expect = chai.expect
@@ -52,7 +52,7 @@ const files = {
   `
 }
 
-describe('helper.js', () => {
+describe('unit.helper', () => {
   var sandbox
 
   beforeEach(() => {

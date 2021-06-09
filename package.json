@@ -23,27 +23,29 @@
   ],
   "main": "src/index.js",
   "scripts": {
-    "test": "nyc mocha",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "test:e2e": "mocha --timeout 10000 ./test/e2e/**/*.test.js",
+    "test:unit": "mocha --timeout 10000 ./test/unit/**/*.test.js",
+    "test": "mocha --timeout 10000 ./test/**/*.test.js",
     "lint": "standard"
   },
   "dependencies": {
-    "aws-sdk": "^2.273.1",
-    "dotenv": "^7.0.0",
-    "fs-extra": "^6.0.1",
+    "aws-sdk": "2.924.0",
+    "dotenv": "10.0.0",
+    "fs-extra": "10.0.0",
     "yaml": "2.0.0-0"
   },
   "devDependencies": {
     "chai": "^4.0.0",
     "chai-as-promised": "^7.1.1",
-    "coveralls": "^3.0.5",
+    "etl": "0.6.12",
+    "execa": "5.1.1",
     "mocha": "^3.4.2",
-    "nyc": "^10.3.2",
-    "serverless": "^1.14.0",
+    "serverless": "2.x.x",
     "sinon": "^2.3.2",
-    "standard": "^10.0.2"
+    "standard": "^10.0.2",
+    "unzipper": "0.10.11"
   },
   "peerDependencies": {
-    "serverless": "^1.14.0"
+    "serverless": "2.x.x"
   }
 }

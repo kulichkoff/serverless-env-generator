@@ -3,12 +3,12 @@ const aws = require('aws-sdk')
 const chai = require('chai')
 const chaiAsPromised = require('chai-as-promised')
 const sinon = require('sinon')
-const kms = require('../src/kms')
+const kms = require('../../src/kms')
 
 chai.use(chaiAsPromised)
 const expect = chai.expect
 
-describe('kms.js', () => {
+describe('unit.kms', () => {
   var sandbox
 
   beforeEach(() => {

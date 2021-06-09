@@ -2,7 +2,7 @@
 const expect = require('chai').expect
 const sinon = require('sinon')
 const fs = require('fs-extra')
-const yaml = require('../src/yaml')
+const yaml = require('../../src/yaml')
 
 const yamlText = `dev:
   foo: bar
@@ -15,7 +15,7 @@ const yamlDoc = {
   prod: { foo: 'baz' }
 }
 
-describe('yaml.js', () => {
+describe('unit.yaml', () => {
   var sandbox
 
   beforeEach(() => {

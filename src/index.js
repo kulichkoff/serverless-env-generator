@@ -17,23 +17,28 @@ class ServerlessEnvGeneratorPlugin {
         options: {
           attribute: {
             usage: 'Name of the attribute',
-            shortcut: 'a'
+            shortcut: 'a',
+            type: 'string'
           },
           anchor: {
             usage: 'Name of the anchor',
-            shortcut: 'c'
+            shortcut: 'c',
+            type: 'string'
           },
           value: {
             usage: 'Value of the attribute',
-            shortcut: 'v'
+            shortcut: 'v',
+            type: 'string'
           },
           encrypt: {
             usage: 'Denotes that a variable should be encrypted',
-            shortcut: 'e'
+            shortcut: 'e',
+            type: 'boolean'
           },
           decrypt: {
             usage: 'Denotes that variables should be decrypted',
-            shortcut: 'd'
+            shortcut: 'd',
+            type: 'boolean'
           }
         },
         commands: {

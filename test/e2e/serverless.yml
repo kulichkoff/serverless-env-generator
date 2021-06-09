@@ -1,0 +1,25 @@
+service: test
+
+provider:
+  name: aws
+  lambdaHashingVersion: 20201221
+  runtime: nodejs14.x
+
+functions:
+  handler:
+    handler: handler.main
+
+plugins:
+  - ../../
+
+package:
+  patterns:
+    - "!**/*"
+    - "handler.js"
+    - ".env"
+
+custom:
+  envFiles:
+    - env.yml
+  envEncryptionKeyId:
+    dev: somedevkey

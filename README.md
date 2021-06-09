@@ -3,7 +3,9 @@ Serverless Env Generator Plugin
 
 [![License][ico-license]][link-license] [![NPM][ico-npm]][link-npm]
 
-This is fork of [serverless-env-generator](https://github.com/DieProduktMacher/serverless-env-generator) with more advanced YAML anchor supporting. See extended description for [Commands](#commands) and [YAML File Structure](#yaml-file-structure) and see [Key features of this fork](#key-features-of-this-fork).
+THIS FORK SUPPORTS ONLY SERVERLESS V2
+
+This is a fork of [serverless-env-generator](https://github.com/DieProduktMacher/serverless-env-generator) with more advanced YAML anchor supporting. See extended description for [Commands](#commands) and [YAML File Structure](#yaml-file-structure) and see [Key features of this fork](#key-features-of-this-fork).
 
 This plugin automatically creates a *.env* file during deployment by merging environment variables from one or more YAML files. During runtime these variables can then be loaded into *process.env* using *dotenv*.
 
@@ -23,6 +25,7 @@ For a brief introduction, read our blogpost about [introducing serverless-env-ge
 
 - Don`t expand merge directives when modifying env file
 - Add new commands that work with anchors
+- Support for serverless v2
 
 ### Notes
 
@@ -49,8 +52,8 @@ The `.env.local` file in the project root is here only for the tests.
 
 # Requirements
 
-- node >= 8.0
-- serverless >= 1.14
+- node >= 10
+- serverless >= 2
 - [See below for usage with serverless-plugin-webpack](#usage-with-the-serverless-plugin-webpack)
 
 
@@ -79,7 +82,7 @@ For aliases we recommend to use the service name, for administration privileges 
 ```yaml
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs14.x
 
 functions:
   hello:

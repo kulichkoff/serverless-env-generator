@@ -24,6 +24,9 @@ const getKms = module.exports._getKms = (config) => {
 
 // Wrapper for kms.encrypt
 module.exports.encrypt = (text, config) => {
+  if (process.env.SERVERLESS_ENV_GENERATOR_MOCK_KMS === 'true') {
+    return Promise.resolve('__encrypted');
+  }
   return new Promise((resolve, reject) => {
     getKms(config).encrypt({ Plaintext: String(text) }, (error, data) => {
       if (error) {
@@ -38,6 +41,9 @@ module.exports.encrypt = (text, config) => {
 
 // Wrapper for kms.decrypt
 module.exports.decrypt = (encryptedText, config) => {
+  if (process.env.SERVERLESS_ENV_GENERATOR_MOCK_KMS === 'true') {
+    return Promise.resolve('__decrypted');
+  }
   return new Promise((resolve, reject) => {
     let blob = Buffer.from(encryptedText, 'base64')
     getKms(config).decrypt({ CiphertextBlob: blob }, (error, data) => {
