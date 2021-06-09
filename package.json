@@ -4,6 +4,9 @@
   "engines": {
     "node": ">=10.0"
   },
+  "files": [
+    "src/**/*.js"
+  ],
   "description": "Fork of https://github.com/DieProduktMacher/serverless-env-generator with more advanced YAML anchors supporting",
   "author": "Kirill Khoroshilov <mr.hokid@gmail.com>",
   "license": "MIT",
