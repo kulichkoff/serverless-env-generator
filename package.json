@@ -2,7 +2,7 @@
   "name": "@redtea/serverless-env-generator",
   "version": "2.0.0",
   "engines": {
-    "node": ">=8.0"
+    "node": ">=10.0"
   },
   "description": "Fork of https://github.com/DieProduktMacher/serverless-env-generator with more advanced YAML anchors supporting",
   "author": "Kirill Khoroshilov <mr.hokid@gmail.com>",
