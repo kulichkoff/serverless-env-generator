@@ -2,7 +2,7 @@
   "name": "@redtea/serverless-env-generator",
   "version": "2.1.0",
   "engines": {
-    "node": ">=10.0"
+    "node": ">=14.x.x"
   },
   "files": [
     "src/**/*.js"
@@ -43,12 +43,12 @@
     "etl": "0.6.12",
     "execa": "5.1.1",
     "mocha": "^3.4.2",
-    "serverless": "2.x.x",
+    "serverless": "3.x.x",
     "sinon": "^2.3.2",
     "standard": "^10.0.2",
     "unzipper": "0.10.11"
   },
   "peerDependencies": {
-    "serverless": "2.x.x"
+    "serverless": "3.x.x"
   }
 }

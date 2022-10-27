@@ -52,10 +52,10 @@ describe('e2e.plugin', () => {
 
     const output = await serverless.getOutput()
 
-    expect(output).to.include('Serverless: env.yml:')
-    expect(output).to.include('Serverless:   baz: __baz')
-    expect(output).to.include('Serverless:   foo: __foo')
-    expect(output).to.include('Serverless:   encrypted: ******')
+    expect(output).to.include('env.yml:')
+    expect(output).to.include('  baz: __baz')
+    expect(output).to.include('  foo: __foo')
+    expect(output).to.include('  encrypted: ******')
   })
 
   it('should list environment variables for attribute "foo" and stage "dev"', async () => {
@@ -66,8 +66,8 @@ describe('e2e.plugin', () => {
 
     const output = await serverless.getOutput()
 
-    expect(output).to.include('Serverless: env.yml:')
-    expect(output).to.include('Serverless:   foo: __foo')
+    expect(output).to.include('env.yml:')
+    expect(output).to.include('  foo: __foo')
   })
 
   it('should list decrypted environment variables', async () => {
@@ -81,10 +81,10 @@ describe('e2e.plugin', () => {
 
     const output = await serverless.getOutput()
 
-    expect(output).to.include('Serverless: env.yml:')
-    expect(output).to.include('Serverless:   baz: __baz')
-    expect(output).to.include('Serverless:   foo: __foo')
-    expect(output).to.include('Serverless:   encrypted: __decrypted (encrypted)')
+    expect(output).to.include('env.yml:')
+    expect(output).to.include('  baz: __baz')
+    expect(output).to.include('  foo: __foo')
+    expect(output).to.include('  encrypted: __decrypted (encrypted)')
   })
 
   it('should write an environment variable', async () => {

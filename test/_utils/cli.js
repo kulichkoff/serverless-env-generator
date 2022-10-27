@@ -29,8 +29,9 @@ module.exports.run = async function setup(options) {
   return {
     process: serverlessProcess,
     getOutput: async () => {
-      const {stdout} = await serverlessProcess
-      return stdout
+      // now serverless puts logs to stderr
+      const {stderr} = await serverlessProcess
+      return stderr
     }
   }
 }
