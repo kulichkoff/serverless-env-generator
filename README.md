@@ -3,7 +3,7 @@ Serverless Env Generator Plugin
 
 [![License][ico-license]][link-license] [![NPM][ico-npm]][link-npm]
 
-THIS FORK SUPPORTS ONLY SERVERLESS V2
+THIS FORK SUPPORTS ONLY SERVERLESS V3
 
 This is a fork of [serverless-env-generator](https://github.com/DieProduktMacher/serverless-env-generator) with more advanced YAML anchor supporting. See extended description for [Commands](#commands) and [YAML File Structure](#yaml-file-structure) and see [Key features of this fork](#key-features-of-this-fork).
 
@@ -25,7 +25,7 @@ For a brief introduction, read our blogpost about [introducing serverless-env-ge
 
 - Don`t expand merge directives when modifying env file
 - Add new commands that work with anchors
-- Support for serverless v2
+- Support for serverless v3
 
 ### Notes
 
@@ -52,8 +52,8 @@ The `.env.local` file in the project root is here only for the tests.
 
 # Requirements
 
-- node >= 10
-- serverless >= 2
+- node >= 14
+- serverless >= 3
 - [See below for usage with serverless-plugin-webpack](#usage-with-the-serverless-plugin-webpack)
 
 
