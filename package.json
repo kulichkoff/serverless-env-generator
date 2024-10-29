@@ -49,6 +49,6 @@
     "unzipper": "0.10.11"
   },
   "peerDependencies": {
-    "serverless": "4.x.x"
+    "serverless": "4.x.x || 3.x.x"
   }
 }
