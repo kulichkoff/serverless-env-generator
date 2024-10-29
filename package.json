@@ -2,7 +2,7 @@
   "name": "@redtea/serverless-env-generator",
   "version": "3.0.1",
   "engines": {
-    "node": ">=18.x.x"
+    "node": ">=14.x.x"
   },
   "files": [
     "src/**/*.js"
