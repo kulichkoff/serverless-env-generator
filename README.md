@@ -52,7 +52,7 @@ The `.env.local` file in the project root is here only for the tests.
 
 # Requirements
 
-- node >= 14
+- node >= 18
 - serverless >= 4
 - [See below for usage with serverless-plugin-webpack](#usage-with-the-serverless-plugin-webpack)
 
