@@ -3,7 +3,7 @@ Serverless Env Generator Plugin
 
 [![License][ico-license]][link-license] [![NPM][ico-npm]][link-npm]
 
-THIS FORK SUPPORTS ONLY SERVERLESS V4
+THIS FORK SUPPORTS ONLY SERVERLESS v3 or V4
 
 This is a fork of [serverless-env-generator](https://github.com/DieProduktMacher/serverless-env-generator) with more advanced YAML anchor supporting. See extended description for [Commands](#commands) and [YAML File Structure](#yaml-file-structure) and see [Key features of this fork](#key-features-of-this-fork).
 
@@ -25,7 +25,7 @@ For a brief introduction, read our blogpost about [introducing serverless-env-ge
 
 - Don`t expand merge directives when modifying env file
 - Add new commands that work with anchors
-- Support for serverless v4
+- Support for serverless v4 and v3
 
 ### Notes
 
